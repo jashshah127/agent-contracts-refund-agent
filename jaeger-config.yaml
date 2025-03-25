@@ -1,0 +1,10 @@
+collector:
+  zipkin:
+    http-port: 9411
+  otlp:
+    grpc:
+      enabled: true
+    http:
+      enabled: true
+query:
+  base_path: /

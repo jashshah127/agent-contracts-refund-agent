@@ -1,0 +1,9 @@
+{
+  "tracingEnabled": true,
+  "menu": [
+    {
+      "label": "Jaeger UI",
+      "url": "/"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+# Use a base image that supports Python
+FROM python:3.8-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the local code into the container
+COPY . /app
+
+# Install dependencies using poetry
+RUN pip install poetry
+RUN poetry install
+
+# Command to run your verification (replace if different)
+CMD ["python", "verification_script.py"]

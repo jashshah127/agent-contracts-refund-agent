@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "5775:5775"  # Jaeger port mapping (adjust as needed)
+      - "5778:5778"  # Admin port
+      - "6831:6831"  # UDP port for client-side sampling
+      - "6832:6832"  # Another UDP port for client-side sampling
+      - "5779:5779"  # HTTP server port for Jaeger API
+      - "16686:16686"  # Web UI for Jaeger
+      - "14250:14250"  # gRPC for Jaeger
+      - "14268:14268"  # HTTP for Jaeger tracing
+      - "14275:14275"  # HTTP for Jaeger tracing
+      - "14276:14276"  # HTTP for Jaeger tracing
+      - "55681:55681"  # OpenTelemetry gRPC receiver
+
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_HTTP_PORT=9411  # Zipkin HTTP port
+
+    networks:
+      - mynetwork
+
+  # If you have other services such as OpenTelemetry Collector or Python service, define them here
+
+  # Example of python service (replace with your actual python service if needed)
+  python-service:
+    image: python:3.9
+    container_name: python-service
+    ports:
+      - "5000:5000"  # Adjust to whatever port your Python service uses
+    networks:
+      - mynetwork
+    command: python app.py  # Modify with your actual command for running the Python service
+
+networks:
+  mynetwork:
+    driver: bridge
